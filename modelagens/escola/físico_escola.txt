@@ -1,0 +1,76 @@
+- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+
+
+CREATE TABLE disciplina (
+id_disciplina int PRIMARY KEY,
+nome varchar (255),
+descrição text,
+base_tecnológica longtext
+)
+
+CREATE TABLE professor (
+id_prof int PRIMARY KEY,
+nome varchar(255),
+cpf char (16),
+contratacao date,
+data_nasc date,
+email varchar (255),
+hrs_trabalhadas int,
+salario int,
+telefone char (20)
+)
+
+CREATE TABLE turma (
+id_tuurma int PRIMARY KEY,
+vagas int,
+alunos int,
+data_inicio date,
+id_aluno int
+)
+
+CREATE TABLE aluno (
+id_aluno int PRIMARY KEY,
+email varchar(255),
+nome varchar (255),
+data_nasc date,
+cpf char(16),
+matricula_data date,
+rg char (20),
+telefone char (20),
+notas int,
+frequencia int,
+histórico varchar (255)
+)
+
+CREATE TABLE curso (
+id_curso int PRIMARY KEY,
+noome varchar (100),
+carga_hr varchar (300),
+num_vagas int,
+duração int
+)
+
+CREATE TABLE possui (
+id_curso int,
+id_tuurma int,
+FOREIGN KEY(id_curso) REFERENCES curso (id_curso),
+FOREIGN KEY(id_tuurma) REFERENCES turma (id_tuurma)
+)
+
+CREATE TABLE ministra (
+id_prof int,
+id_disciplina int,
+FOREIGN KEY(id_prof) REFERENCES professor (id_prof),
+FOREIGN KEY(id_disciplina) REFERENCES disciplina (id_disciplina)
+)
+
+-- Erro: Nome de tabela duplicado (este erro compromete a integridade referencial)!
+CREATE TABLE possui (
+id_curso int,
+id_disciplina int,
+FOREIGN KEY(id_curso) REFERENCES curso (id_curso)/*falha: chave estrangeira*/
+)
+
+ALTER TABLE turma ADD FOREIGN KEY(id_aluno) REFERENCES aluno (id_aluno)
