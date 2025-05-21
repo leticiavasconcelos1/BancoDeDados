@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Maio-2025 às 17:37
+-- Tempo de geração: 21-Maio-2025 às 17:44
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -45,7 +45,10 @@ INSERT INTO `categorias` (`id_categoria`, `nome_cat`) VALUES
 (4, 'Frios'),
 (5, 'Açougue'),
 (6, 'Enlatados'),
-(7, 'Perfumaria');
+(7, 'Perfumaria'),
+(15, 'Eletronicos'),
+(16, 'papelaria'),
+(17, 'roupas');
 
 -- --------------------------------------------------------
 
@@ -59,8 +62,29 @@ CREATE TABLE `produtos` (
   `preco` decimal(10,2) DEFAULT NULL,
   `quant` int(11) DEFAULT NULL,
   `marca` varchar(255) DEFAULT NULL,
-  `id_categoria` int(11) DEFAULT NULL
+  `id_categoria` int(11) DEFAULT NULL,
+  `unidade_medida` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id_produto`, `nome`, `preco`, `quant`, `marca`, `id_categoria`, `unidade_medida`) VALUES
+(1, 'sabão em pó', '30.50', 50, 'omo', 1, 'un'),
+(2, 'detergente', '3.55', 10, 'ype', 1, 'un'),
+(3, 'papel higienico', '15.50', 15, 'nuvem', 2, 'un'),
+(4, 'sabonete liquido', '7.50', 5, 'monange', 2, 'un'),
+(5, 'desinfetante', '30.78', 10, 'pinhosol', 3, 'un'),
+(6, 'amaciante', '46.99', 20, 'ype', 3, 'un'),
+(7, 'queijo', '8.90', 3, 'seara', 4, 'kg'),
+(8, 'presunto', '12.89', 4, 'sadia', 4, 'kg'),
+(9, 'acém', '36.77', 4, 'swift', 5, 'kg'),
+(10, 'picanha', '45.88', 6, 'swift', 5, 'kg'),
+(11, 'sardinha', '3.78', 20, 'quero', 6, 'un'),
+(12, 'milho', '9.90', 7, 'coquinho', 6, 'un'),
+(13, 'esmalte', '6.87', 89, 'risque', 7, 'un'),
+(14, 'acetona', '10.65', 70, 'beira alta', 7, 'un');
 
 --
 -- Índices para tabelas despejadas
@@ -87,13 +111,13 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restrições para despejos de tabelas
