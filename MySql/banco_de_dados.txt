@@ -1,0 +1,230 @@
+MariaDB [etecmcm2]> select * from produtos;
++------------+------------------+-------+-------+------------+--------------+----------------+
+| id_produto | nome             | preco | quant | marca      | id_categoria | unidade_medida |
++------------+------------------+-------+-------+------------+--------------+----------------+
+|          1 | sabão em pó      | 30.50 |    50 | omo        |            1 | un             |
+|          2 | detergente       |  3.55 |    10 | ype        |            1 | un             |
+|          3 | papel higienico  | 15.50 |    15 | nuvem      |            2 | un             |
+|          4 | sabonete liquido |  7.50 |     5 | monange    |            2 | un             |
+|          5 | desinfetante     | 30.78 |    10 | pinhosol   |            3 | un             |
+|          6 | amaciante        | 46.99 |    20 | ype        |            3 | un             |
+|          7 | queijo           |  8.90 |     3 | seara      |            4 | kg             |
+|          8 | presunto         | 12.89 |     4 | sadia      |            4 | kg             |
+|          9 | acém             | 36.77 |     4 | swift      |            5 | kg             |
+|         10 | picanha          | 45.88 |     6 | swift      |            5 | kg             |
+|         11 | sardinha         |  3.78 |    20 | quero      |            6 | un             |
+|         12 | milho            |  9.90 |     7 | coquinho   |            6 | un             |
+|         13 | esmalte          |  6.87 |    89 | risque     |            7 | un             |
+|         14 | acetona          | 10.65 |    70 | beira alta |            7 | un             |
++------------+------------------+-------+-------+------------+--------------+----------------+
+14 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome, preco from produtos;
++------------------+-------+
+| nome             | preco |
++------------------+-------+
+| sabão em pó      | 30.50 |
+| detergente       |  3.55 |
+| papel higienico  | 15.50 |
+| sabonete liquido |  7.50 |
+| desinfetante     | 30.78 |
+| amaciante        | 46.99 |
+| queijo           |  8.90 |
+| presunto         | 12.89 |
+| acém             | 36.77 |
+| picanha          | 45.88 |
+| sardinha         |  3.78 |
+| milho            |  9.90 |
+| esmalte          |  6.87 |
+| acetona          | 10.65 |
++------------------+-------+
+14 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produtos where marca = 'swift ';
++------------+---------+-------+-------+-------+--------------+----------------+
+| id_produto | nome    | preco | quant | marca | id_categoria | unidade_medida |
++------------+---------+-------+-------+-------+--------------+----------------+
+|          9 | acém    | 36.77 |     4 | swift |            5 | kg             |
+|         10 | picanha | 45.88 |     6 | swift |            5 | kg             |
++------------+---------+-------+-------+-------+--------------+----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produtos where preco > 20;
++------------+--------------+-------+-------+----------+--------------+----------------+
+| id_produto | nome         | preco | quant | marca    | id_categoria | unidade_medida |
++------------+--------------+-------+-------+----------+--------------+----------------+
+|          1 | sabão em pó  | 30.50 |    50 | omo      |            1 | un             |
+|          5 | desinfetante | 30.78 |    10 | pinhosol |            3 | un             |
+|          6 | amaciante    | 46.99 |    20 | ype      |            3 | un             |
+|          9 | acém         | 36.77 |     4 | swift    |            5 | kg             |
+|         10 | picanha      | 45.88 |     6 | swift    |            5 | kg             |
++------------+--------------+-------+-------+----------+--------------+----------------+
+5 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]>  select * from produtos where quant <= 10;
++------------+------------------+-------+-------+----------+--------------+----------------+
+| id_produto | nome             | preco | quant | marca    | id_categoria | unidade_medida |
++------------+------------------+-------+-------+----------+--------------+----------------+
+|          2 | detergente       |  3.55 |    10 | ype      |            1 | un             |
+|          4 | sabonete liquido |  7.50 |     5 | monange  |            2 | un             |
+|          5 | desinfetante     | 30.78 |    10 | pinhosol |            3 | un             |
+|          7 | queijo           |  8.90 |     3 | seara    |            4 | kg             |
+|          8 | presunto         | 12.89 |     4 | sadia    |            4 | kg             |
+|          9 | acém             | 36.77 |     4 | swift    |            5 | kg             |
+|         10 | picanha          | 45.88 |     6 | swift    |            5 | kg             |
+|         12 | milho            |  9.90 |     7 | coquinho |            6 | un             |
++------------+------------------+-------+-------+----------+--------------+----------------+
+8 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome, preco from produtos ordem by preco asc limit 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'by preco asc limit 5' at line 1
+MariaDB [etecmcm2]> select nome, preco from produtos order by preco asc limit 5;
++------------------+-------+
+| nome             | preco |
++------------------+-------+
+| detergente       |  3.55 |
+| sardinha         |  3.78 |
+| esmalte          |  6.87 |
+| sabonete liquido |  7.50 |
+| queijo           |  8.90 |
++------------------+-------+
+5 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome, preco from produtos order by preco desc limit 5;
++--------------+-------+
+| nome         | preco |
++--------------+-------+
+| amaciante    | 46.99 |
+| picanha      | 45.88 |
+| acém         | 36.77 |
+| desinfetante | 30.78 |
+| sabão em pó  | 30.50 |
++--------------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select count(*) as total_produtos from produtos;
++----------------+
+| total_produtos |
++----------------+
+|             14 |
++----------------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select avg (preco) as preco_medio from produtos;
++-------------+
+| preco_medio |
++-------------+
+|   19.318571 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome, quant from produtos order by quant desc limit 1;
++---------+-------+
+| nome    | quant |
++---------+-------+
+| esmalte |    89 |
++---------+-------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select p.nome,c.nome_cat from produtos p join categorias c on p.id_categoria = c.id_categoria;
++------------------+------------+
+| nome             | nome_cat   |
++------------------+------------+
+| sabão em pó      | Laticinios |
+| detergente       | Laticinios |
+| papel higienico  | higiene    |
+| sabonete liquido | higiene    |
+| desinfetante     | limpeza    |
+| amaciante        | limpeza    |
+| queijo           | Frios      |
+| presunto         | Frios      |
+| acém             | Açougue    |
+| picanha          | Açougue    |
+| sardinha         | Enlatados  |
+| milho            | Enlatados  |
+| esmalte          | Perfumaria |
+| acetona          | Perfumaria |
++------------------+------------+
+14 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select p.nome, p.marca, p.preço from produtos p join categorias c on p.id_categoria = c.id_categoria;
+ERROR 1054 (42S22): Unknown column 'p.preço' in 'field list'
+MariaDB [etecmcm2]> select p.nome, p.marca, p.preço from produtos p join categorias c on p.id_categoria = c.id_categoria where c.nome_cat = 'Laticinios';
+ERROR 1054 (42S22): Unknown column 'p.preço' in 'field list'
+MariaDB [etecmcm2]> select p.nome, p.marca, p.preco from produtos p join categorias c on p.id_categoria = c.id_categoria where c.nome_cat = 'Laticinios';
++-------------+-------+-------+
+| nome        | marca | preco |
++-------------+-------+-------+
+| sabão em pó | omo   | 30.50 |
+| detergente  | ype   |  3.55 |
++-------------+-------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select c.nome_cat, count(*) as total_produtos from produtos p join categorias c on p.id_categoria = c.id_categoria group by c.nome_cat;/
++------------+----------------+
+| nome_cat   | total_produtos |
++------------+----------------+
+| Açougue    |              2 |
+| Enlatados  |              2 |
+| Frios      |              2 |
+| higiene    |              2 |
+| Laticinios |              2 |
+| limpeza    |              2 |
+| Perfumaria |              2 |
++------------+----------------+
+7 rows in set (0.001 sec)
+
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '/' at line 1
+MariaDB [etecmcm2]> select * from produtos where preco between 10 and 20;
++------------+-----------------+-------+-------+------------+--------------+----------------+
+| id_produto | nome            | preco | quant | marca      | id_categoria | unidade_medida |
++------------+-----------------+-------+-------+------------+--------------+----------------+
+|          3 | papel higienico | 15.50 |    15 | nuvem      |            2 | un             |
+|          8 | presunto        | 12.89 |     4 | sadia      |            4 | kg             |
+|         14 | acetona         | 10.65 |    70 | beira alta |            7 | un             |
++------------+-----------------+-------+-------+------------+--------------+----------------+
+3 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select * from produtos where nome like 'p%';
++------------+-----------------+-------+-------+-------+--------------+----------------+
+| id_produto | nome            | preco | quant | marca | id_categoria | unidade_medida |
++------------+-----------------+-------+-------+-------+--------------+----------------+
+|          3 | papel higienico | 15.50 |    15 | nuvem |            2 | un             |
+|          8 | presunto        | 12.89 |     4 | sadia |            4 | kg             |
+|         10 | picanha         | 45.88 |     6 | swift |            5 | kg             |
++------------+-----------------+-------+-------+-------+--------------+----------------+
+3 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select distinct marca from produtos;
++------------+
+| marca      |
++------------+
+| omo        |
+| ype        |
+| nuvem      |
+| monange    |
+| pinhosol   |
+| seara      |
+| sadia      |
+| swift      |
+| quero      |
+| coquinho   |
+| risque     |
+| beira alta |
++------------+
+12 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]>
+
+
+
+
+
+
+
+
+
+
+
+
