@@ -1,0 +1,31 @@
+CREATE TABLE categorias(
+    id_categoria int AUTO_INCREMENT primary KEY,
+    nomeCategoria varchar(255) not null);
+   
+CREATE TABLE redator(
+    id_redator int AUTO_INCREMENT PRIMARY KEY,
+    nome varchar(255) not null,
+    datanasc date not null,
+    cpf varchar (20) not null UNIQUE);
+    
+CREATE table tipoContato(
+    id_tipoContato int AUTO_INCREMENT primary KEY,
+    tipoContato varchar(255) not null);
+    
+CREATE TABLE contato(
+    id_contato int AUTO_INCREMENT PRIMARY KEY,
+    contato varchar(255) not null,
+    idtipocontato int,
+    idredator int,
+    FOREIGN KEY (idtipocontato) REFERENCES tipoContato (id_tipoContato),
+    FOREIGN KEY (idredator) REFERENCES redator (id_redator));
+    
+ CREATE TABLE noticia(
+     id_noticia int AUTO_INCREMENT PRIMARY KEY,
+     tituloNoticia varchar(255) not null,
+     noticia text not null,
+     datanot date not null,
+     categoria int,
+     redator int,
+     FOREIGN KEY (categoria) REFERENCES categorias  (id_categoria),
+     FOREIGN KEY (redator) REFERENCES redator (id_redator));
