@@ -1,0 +1,98 @@
+CREATE DATABASE atividade_estacionamento
+use atividade_estacionamento
+
+create table cliente(
+    cod_cliente int PRIMARY KEY AUTO_INCREMENT,
+    cpf varchar (20),
+    dtnasc datetime,
+    nome varchar(20));
+
+create table modelo(
+    codmodelo int PRIMARY KEY AUTO_INCREMENT,
+    modelo varchar(30));
+
+CREATE TABLE andar( 
+    codLugar int PRIMARY KEY AUTO_INCREMENT,
+    capacidade int,
+    andar varchar(20));
+ALTER TABLE veiculo ADD FOREIGN KEY (cod_cliente) 
+ALTER TABLE veiculo ADD FOREIGN KEY (cod_cliente) REFERENCES cliente(cod_cliente);
+ALTER TABLE veiculo ADD codmodelo int;
+ALTER TABLE veiculo ADD FOREIGN KEY (codmodelo) REFERENCES modelo(codmodelo);
+
+
+CREATE TABLE estaciona( 
+    cod int PRIMARY KEY AUTO_INCREMENT,
+    horsaida datetime,
+    dtentrada date,
+    horentrada datetime,
+    dtsaida date);
+
+ALTER TABLE estaciona ADD cod_cliente int;
+ALTER TABLE estaciona ADD FOREIGN KEY (cod_cliente) REFERENCES cliente(cod_cliente);
+ALTER TABLE estaciona ADD codlugar int;
+ALTER TABLE estaciona ADD FOREIGN KEY (codlugar) REFERENCES andar(codlugar);
+------------
+
+INSERT INTO cliente (cpf, dtnasc, nome) VALUES 
+('123.456.789-00', '1985-03-15 00:00:00', 'João'),
+('987.654.321-00', '1990-07-22 00:00:00', 'Maria'),
+('456.789.123-00', '1975-12-05 00:00:00', 'Carlos');
+('321.654.987-11', '1992-11-30 00:00:00', 'Fernanda'),
+('741.852.963-22', '1988-04-10 00:00:00', 'Rafael');
+
+
+INSERT INTO modelo (modelo) VALUES 
+('Fiat Uno'),
+('Chevrolet Onix'),
+('Volkswagen Gol');
+('Toyota Corolla'),
+('Honda Civic');
+
+
+INSERT INTO andar (capacidade, andar) VALUES 
+(50, 'Subsolo 1'),
+(30, 'Subsolo 2'),
+(40, 'Térreo'); 
+(35, 'Subsolo 3'),
+(25, 'Cobertura');
+
+
+INSERT INTO veiculo (placa, cod_cliente, codmodelo) VALUES 
+('ABC-1234', 1, 1),
+('DEF-5678', 2, 2),
+('GHI-9012', 3, 3);
+('JKL-3456', 4, 4);
+('MNO-7890', 5, 5);
+
+INSERT INTO estaciona (horsaida, dtentrada, horentrada, dtsaida, codlugar) VALUES 
+('2025-09-01 18:00:00', '2025-09-01', '2025-09-01 08:00:00', '2025-09-01', 1),
+('2025-09-02 19:00:00', '2025-09-02', '2025-09-02 09:00:00', '2025-09-02', 2),
+('2025-09-02 20:00:00', '2025-09-02', '2025-09-02 10:00:00', '2025-09-02', 3);
+('2025-09-02 17:30:00', '2025-09-02', '2025-09-02 08:15:00', '2025-09-02', 4);
+('2025-09-02 18:45:00', '2025-09-02', '2025-09-02 09:30:00', '2025-09-02', 5);
+
+-- João - Fiat Uno - Preto
+INSERT INTO veiculo (cor) VALUES 
+('Preto');
+
+-- Maria - Onix - Branco
+INSERT INTO veiculo (cor) VALUES 
+('Branco');
+
+-- Carlos - Gol - Prata
+INSERT INTO veiculo (cor) VALUES 
+('Prata');
+
+-- Fernanda - Corolla - Vermelho
+INSERT INTO veiculo (cor) VALUES 
+('Vermelho');
+
+-- Rafael - Civic - Azul
+INSERT INTO veiculo (cor) VALUES 
+('Azul');
+
+
+-----------------
+
+
